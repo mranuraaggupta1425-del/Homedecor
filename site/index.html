@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Atelier | Luxury Home Decor</title>
+<meta name="description" content="The Atelier — curated luxury home decor. Artisanal furniture, lighting, and textiles crafted for timeless living spaces."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "on-surface": "#1c1c19",
+        "background": "#fcf9f4",
+        "on-error": "#ffffff",
+        "outline": "#737973",
+        "surface-container-low": "#f6f3ee",
+        "surface-tint": "#4a6453",
+        "surface-container": "#f0ede8",
+        "secondary-container": "#fed488",
+        "surface-bright": "#fcf9f4",
+        "surface-container-highest": "#e5e2dd",
+        "on-primary": "#ffffff",
+        "primary-fixed": "#ccead3",
+        "surface-dim": "#dcdad5",
+        "tertiary": "#3d241d",
+        "outline-variant": "#c2c8c1",
+        "primary-container": "#2d4636",
+        "inverse-primary": "#b1cdb8",
+        "error": "#ba1a1a",
+        "on-surface-variant": "#424843",
+        "on-secondary-container": "#785a1a",
+        "surface-container-high": "#ebe8e3",
+        "secondary": "#775a19",
+        "on-primary-container": "#97b39f",
+        "on-tertiary-container": "#cba498",
+        "primary": "#173021",
+        "tertiary-container": "#563a31",
+        "surface-variant": "#e5e2dd",
+        "surface-container-lowest": "#ffffff",
+        "inverse-surface": "#31302d",
+        "inverse-on-surface": "#f3f0eb",
+        "on-background": "#1c1c19",
+        "surface": "#fcf9f4",
+        "on-tertiary": "#ffffff",
+        "on-secondary": "#ffffff"
+      },
+      fontFamily: {
+        "headline": ["Noto Serif", "serif"],
+        "body": ["Manrope", "sans-serif"],
+        "label": ["Manrope", "sans-serif"]
+      },
+      borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+    },
+  },
+}
+</script>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+
+<!-- ======================== NAVIGATION ======================== -->
+<nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500">
+  <div class="nav-glass flex justify-between items-center px-6 md:px-8 py-5 w-full max-w-screen-2xl mx-auto">
+    <a href="#" data-page="home" class="text-2xl font-serif italic text-primary font-headline nav-link tracking-tight">The Atelier</a>
+    <div class="hidden md:flex items-center gap-10">
+      <a href="#" data-page="home" class="nav-item text-on-surface-variant uppercase tracking-[0.15em] text-xs font-medium hover:text-primary transition-colors duration-300">Home</a>
+      <a href="#" data-page="collections" class="nav-item text-on-surface-variant uppercase tracking-[0.15em] text-xs font-medium hover:text-primary transition-colors duration-300">Collections</a>
+      <a href="#" data-page="about" class="nav-item text-on-surface-variant uppercase tracking-[0.15em] text-xs font-medium hover:text-primary transition-colors duration-300">About</a>
+      <a href="#" data-page="contact" class="nav-item text-on-surface-variant uppercase tracking-[0.15em] text-xs font-medium hover:text-primary transition-colors duration-300">Contact</a>
+    </div>
+    <div class="flex items-center gap-5">
+      <button id="search-toggle" class="hover:opacity-80 transition-opacity duration-300 text-primary" aria-label="Search">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+      <button id="cart-toggle" class="hover:opacity-80 transition-opacity duration-300 text-primary relative" aria-label="Cart">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-secondary text-on-secondary text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+      </button>
+      <button id="mobile-menu-toggle" class="md:hidden text-primary" aria-label="Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-surface/98 backdrop-blur-xl hidden opacity-0 transition-opacity duration-300">
+  <div class="flex flex-col items-center justify-center h-full gap-8">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-primary"><span class="material-symbols-outlined text-3xl">close</span></button>
+    <a href="#" data-page="home" class="mobile-nav-item font-headline text-3xl text-primary">Home</a>
+    <a href="#" data-page="collections" class="mobile-nav-item font-headline text-3xl text-primary">Collections</a>
+    <a href="#" data-page="about" class="mobile-nav-item font-headline text-3xl text-primary">About</a>
+    <a href="#" data-page="contact" class="mobile-nav-item font-headline text-3xl text-primary">Contact</a>
+  </div>
+</div>
+
+<!-- Search Overlay -->
+<div id="search-overlay" class="fixed inset-0 z-[55] bg-surface/95 backdrop-blur-2xl hidden opacity-0 transition-opacity duration-300">
+  <div class="flex flex-col items-center justify-start pt-32 px-8 h-full">
+    <button id="search-close" class="absolute top-6 right-8 text-primary"><span class="material-symbols-outlined text-3xl">close</span></button>
+    <div class="w-full max-w-2xl">
+      <input id="search-input" type="text" placeholder="Search collections, materials, designers..." class="w-full bg-transparent border-b-2 border-primary/20 focus:border-secondary py-4 text-2xl font-headline text-primary placeholder:text-on-surface-variant/40 outline-none transition-colors"/>
+      <div id="search-results" class="mt-8 space-y-4"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Sidebar -->
+<div id="cart-overlay" class="fixed inset-0 z-[55] bg-primary/20 hidden opacity-0 transition-opacity duration-300" id="cart-bg"></div>
+<aside id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-surface z-[56] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)] shadow-2xl">
+  <div class="flex flex-col h-full">
+    <div class="flex justify-between items-center p-6 pb-4">
+      <h2 class="font-headline text-2xl text-primary">Your Bag</h2>
+      <button id="cart-close" class="text-primary"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div id="cart-items" class="flex-1 overflow-y-auto px-6 space-y-6"></div>
+    <div id="cart-footer" class="p-6 bg-surface-container-low hidden">
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-on-surface-variant uppercase tracking-widest text-xs">Subtotal</span>
+        <span id="cart-total" class="font-headline text-xl text-primary">$0</span>
+      </div>
+      <button id="checkout-btn" class="w-full bg-primary text-on-primary py-4 uppercase tracking-widest text-xs font-semibold hover:bg-primary-container transition-all">
+        Proceed to Checkout
+      </button>
+      <p class="text-center text-on-surface-variant text-xs mt-3">Free shipping on orders over $500</p>
+    </div>
+    <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center px-6">
+      <span class="material-symbols-outlined text-5xl text-outline-variant mb-4">shopping_bag</span>
+      <p class="font-headline text-lg text-primary mb-2">Your bag is empty</p>
+      <p class="text-on-surface-variant text-sm text-center">Explore our collections to find pieces that speak to you.</p>
+    </div>
+  </div>
+</aside>
+
+<!-- ======================== PAGE CONTAINER ======================== -->
+<main id="page-container" class="page-transition">
+
+<!-- ====================== HOME PAGE ====================== -->
+<div id="page-home" class="page active">
+
+  <!-- Hero Section -->
+  <section class="relative h-screen w-full flex items-center px-8 md:px-24 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img alt="Luxury Living Room" class="w-full h-full object-cover" loading="eager" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=3840&q=90&auto=format"/>
+      <div class="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/10 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-2xl text-white">
+      <h1 class="font-headline text-5xl md:text-7xl mb-6 leading-tight tracking-tight reveal-up">Modern Home Decor</h1>
+      <p class="text-lg md:text-xl font-light mb-10 text-surface/90 leading-relaxed reveal-up delay-1">
+        A curated selection of artisanal furniture that transforms the living space into a private gallery of comfort.
+      </p>
+      <div class="flex flex-wrap gap-4 reveal-up delay-2">
+        <button data-page="collections" class="nav-link bg-primary text-on-primary px-10 py-4 uppercase tracking-widest text-xs font-semibold hover:bg-primary-container transition-all duration-300 active:scale-95">
+          Shop Collection
+        </button>
+        <button data-page="about" class="nav-link border border-white/30 backdrop-blur-sm text-white px-10 py-4 uppercase tracking-widest text-xs font-semibold hover:bg-white hover:text-primary transition-all duration-300 active:scale-95">
+          Our Story
+        </button>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <span class="material-symbols-outlined text-white/60 text-3xl">keyboard_arrow_down</span>
+    </div>
+  </section>
+
+  <!-- Featured Collections -->
+  <section class="py-28 px-8 md:px-24 bg-surface">
+    <div class="mb-20 text-center">
+      <h2 class="font-headline text-4xl md:text-5xl text-primary reveal-up">Our Collections</h2>
+      <div class="w-24 h-px bg-secondary/30 mx-auto mt-6 reveal-up delay-1"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+      <div class="md:col-span-7 group relative overflow-hidden reveal-left cursor-pointer" data-page="collections" data-filter="lounge">
+        <div class="aspect-[4/5] md:aspect-[16/10] overflow-hidden">
+          <img alt="The Lounge Series" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" loading="lazy" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=3840&q=90&auto=format"/>
+        </div>
+        <div class="absolute bottom-8 left-8 p-8 bg-surface-container-low/90 backdrop-blur-sm max-w-xs -translate-x-4 group-hover:translate-x-0 transition-transform duration-500">
+          <h3 class="font-headline text-2xl text-primary mb-2">The Lounge Series</h3>
+          <p class="text-sm text-on-surface-variant uppercase tracking-widest">Available in Velvet & Suede</p>
+        </div>
+      </div>
+      <div class="md:col-span-5 flex flex-col gap-24 pt-12">
+        <div class="group relative self-end w-full md:w-4/5 reveal-right cursor-pointer" data-page="collections" data-filter="armchair">
+          <div class="aspect-square overflow-hidden mb-6">
+            <img alt="Armchairs" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" loading="lazy" src="https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=1920&q=90&auto=format"/>
+          </div>
+          <div class="text-right">
+            <h3 class="font-headline text-2xl text-primary">Armchairs</h3>
+            <p class="text-sm text-secondary uppercase tracking-widest mt-2">Sculptural Walnut Craft</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotlight Section — Hanging Swing Collection -->
+  <section class="py-28 bg-surface-container-low overflow-hidden">
+    <div class="container mx-auto px-8 md:px-24 grid md:grid-cols-2 gap-16 items-center">
+      <div class="relative reveal-left cursor-pointer" data-page="collections" data-filter="swing">
+        <div class="absolute -top-12 -left-12 w-64 h-64 bg-secondary-container/30 -z-10 rounded-full blur-3xl"></div>
+        <div class="aspect-[3/4] overflow-hidden rounded-lg">
+          <img alt="Hanging Swing Chair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 relative z-10" loading="lazy" src="images/swings/swing-06.jfif"/>
+        </div>
+        <div class="mt-12 md:pl-12 border-l border-primary/10">
+          <p class="font-headline italic text-xl text-primary/80 max-w-sm">
+            "Suspended in stillness — the art of weightless comfort."
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-8 reveal-right">
+        <div>
+          <span class="text-xs font-semibold text-secondary uppercase tracking-[0.3em] block mb-4">Spotlight</span>
+          <h2 class="font-headline text-5xl text-primary mb-6 leading-tight">The Hanging Swing Collection</h2>
+          <p class="text-on-surface-variant leading-relaxed mb-8 text-lg">
+            A curated series of suspended seating that transforms any corner into a sanctuary. Handwoven rattan, macrame, and sculpted wicker — each piece floats between art and furniture.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-8 py-8 border-y border-outline-variant/20">
+          <div>
+            <h4 class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Materials</h4>
+            <p class="text-sm text-on-surface-variant">Rattan, Macrame, Wicker</p>
+          </div>
+          <div>
+            <h4 class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Styles</h4>
+            <p class="text-sm text-on-surface-variant">Indoor & Outdoor</p>
+          </div>
+        </div>
+        <a class="group flex items-center gap-4 text-primary font-semibold uppercase tracking-widest text-sm cursor-pointer" data-page="collections" data-filter="swing">
+          Explore Swing Collection
+          <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Craftsmanship Section -->
+  <section class="bg-primary py-28 px-8 md:px-24 text-white">
+    <div class="grid md:grid-cols-2 gap-20 items-center">
+      <div class="order-2 md:order-1 relative group reveal-left">
+        <img alt="Designer Crafting" class="w-full h-[600px] object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=3840&q=90&auto=format"/>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 border-r border-b border-secondary/50"></div>
+      </div>
+      <div class="order-1 md:order-2 reveal-right">
+        <h2 class="font-headline text-4xl md:text-5xl mb-8 leading-tight">The Hands Behind the Grain</h2>
+        <p class="text-on-primary-container text-lg leading-relaxed mb-10">
+          Our legacy is carved from the heartwood of sustainably managed forests. Each piece is a testament to the patient hand of the artisan.
+        </p>
+        <div class="space-y-6 mb-12">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span class="uppercase tracking-widest text-sm">Ethical Sourcing: FSC Certified Wood</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span class="uppercase tracking-widest text-sm">Hand-Finished: Natural Oil Patina</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span class="uppercase tracking-widest text-sm">Made to Order: Low Waste Philosophy</span>
+          </div>
+        </div>
+        <button data-page="about" class="nav-link bg-secondary text-white px-10 py-4 uppercase tracking-widest text-xs font-semibold hover:bg-secondary/90 transition-all">
+          Discover Our Legacy
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-24 bg-surface px-8 md:px-24">
+    <div class="grid md:grid-cols-3 gap-16">
+      <div class="text-center group reveal-up">
+        <div class="w-16 h-16 bg-surface-container-low flex items-center justify-center mx-auto mb-8 rounded-full group-hover:bg-primary-fixed transition-colors duration-500">
+          <span class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
+        </div>
+        <h3 class="font-headline text-xl text-primary mb-4">White Glove Delivery</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed px-4">Expert assembly and placement in your room of choice, with all packaging removed.</p>
+      </div>
+      <div class="text-center group reveal-up delay-1">
+        <div class="w-16 h-16 bg-surface-container-low flex items-center justify-center mx-auto mb-8 rounded-full group-hover:bg-primary-fixed transition-colors duration-500">
+          <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+        </div>
+        <h3 class="font-headline text-xl text-primary mb-4">Lifetime Warranty</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed px-4">Our structural frames are built to last generations, backed by an unwavering guarantee.</p>
+      </div>
+      <div class="text-center group reveal-up delay-2">
+        <div class="w-16 h-16 bg-surface-container-low flex items-center justify-center mx-auto mb-8 rounded-full group-hover:bg-primary-fixed transition-colors duration-500">
+          <span class="material-symbols-outlined text-primary text-3xl">architecture</span>
+        </div>
+        <h3 class="font-headline text-xl text-primary mb-4">Design Consultation</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed px-4">Collaborate with our studio experts to curate a palette that reflects your personal ethos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="py-32 bg-surface-container-low px-8 md:px-24 relative">
+    <div class="max-w-4xl mx-auto text-center reveal-up">
+      <div class="flex justify-center gap-1 mb-10 text-secondary">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+      </div>
+      <blockquote class="font-headline text-3xl md:text-5xl italic text-primary leading-snug mb-12">
+        "The walnut textures are so much more profound in person. It's not just furniture; it's a tactile poem."
+      </blockquote>
+      <div class="w-12 h-px bg-primary mx-auto mb-6"></div>
+      <cite class="uppercase tracking-[0.2em] text-sm font-bold text-on-surface not-italic">Elena Voss, Architectural Digest</cite>
+    </div>
+  </section>
+
+</div>
+
+<!-- ====================== COLLECTIONS PAGE ====================== -->
+<div id="page-collections" class="page">
+
+  <div class="pt-32 pb-24 px-8 max-w-screen-2xl mx-auto">
+    <!-- Editorial Header -->
+    <header class="mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+        <div class="md:col-span-8">
+          <span class="text-secondary font-label tracking-[0.2em] uppercase text-xs mb-4 block reveal-up">The 2024 Collection</span>
+          <h1 class="text-5xl md:text-7xl font-headline text-primary leading-tight font-bold tracking-tight reveal-up delay-1">Curation of Comfort</h1>
+        </div>
+        <div class="md:col-span-4 text-on-surface-variant font-light leading-relaxed reveal-up delay-2">
+          Explore our meticulously gathered objects of utility and grace. Each piece is selected for its material integrity and timeless architectural presence.
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-col md:flex-row gap-16">
+      <!-- Sidebar Filters -->
+      <aside class="w-full md:w-64 space-y-12 flex-shrink-0">
+        <section>
+          <h3 class="font-headline text-lg text-primary mb-6">Category</h3>
+          <ul class="space-y-4">
+            <li><button class="filter-cat active text-secondary font-medium" data-category="all">All Objects</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="living">Living Room</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="bedroom">Bedroom</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="dining">Dining</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="lighting">Lighting</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="lounge">Lounge Series</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="swing">Hanging Swings</button></li>
+            <li><button class="filter-cat text-on-surface-variant hover:text-primary transition-colors" data-category="armchair">Armchairs</button></li>
+          </ul>
+        </section>
+        <section>
+          <h3 class="font-headline text-lg text-primary mb-6">Material</h3>
+          <div class="flex flex-wrap gap-2" id="material-filters">
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="all">All</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="walnut">Walnut</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="velvet">Velvet</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="leather">Leather</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="brass">Brushed Brass</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="linen">Linen</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="oak">Oak</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="rattan">Rattan</button>
+            <button class="filter-mat px-3 py-1.5 bg-surface-container text-xs font-label rounded-full hover:bg-surface-container-highest cursor-pointer transition-colors" data-material="wicker">Wicker</button>
+          </div>
+        </section>
+        <section>
+          <h3 class="font-headline text-lg text-primary mb-6">Sort By</h3>
+          <select id="sort-select" class="w-full bg-surface-container text-sm font-label py-2 px-3 rounded outline-none focus:ring-1 focus:ring-secondary border-none">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name A-Z</option>
+          </select>
+        </section>
+        <section>
+          <h3 class="font-headline text-lg text-primary mb-6">Price Range</h3>
+          <div class="space-y-6">
+            <input id="price-range" class="w-full h-1 bg-surface-container-highest appearance-none rounded-full accent-secondary" max="5000" min="0" value="5000" type="range"/>
+            <div class="flex justify-between text-xs font-label text-on-surface-variant">
+              <span>$0</span>
+              <span id="price-label">$5,000+</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Product Grid -->
+      <div class="flex-1">
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <!-- Products injected by JS -->
+        </div>
+        <div class="mt-20 flex flex-col items-center">
+          <div class="h-px w-24 bg-outline-variant mb-8 opacity-40"></div>
+          <button id="load-more-btn" class="text-secondary font-headline italic tracking-wide group flex items-center gap-3 hover:gap-5 transition-all">
+            Discover More
+            <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====================== PRODUCT DETAIL MODAL ====================== -->
+<div id="product-modal" class="fixed inset-0 z-[55] hidden">
+  <div class="absolute inset-0 bg-primary/20 backdrop-blur-sm" id="modal-bg"></div>
+  <div class="absolute inset-4 md:inset-12 bg-surface overflow-y-auto rounded-lg shadow-2xl modal-content">
+    <button id="modal-close" class="absolute top-6 right-6 z-10 bg-surface/80 backdrop-blur-md p-2 rounded-full hover:bg-surface-container transition-colors">
+      <span class="material-symbols-outlined text-primary">close</span>
+    </button>
+    <div id="modal-body" class="grid md:grid-cols-2 gap-0 min-h-full">
+      <!-- Content injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ====================== ABOUT PAGE ====================== -->
+<div id="page-about" class="page">
+
+  <!-- Hero -->
+  <section class="relative min-h-[90vh] flex items-center px-8 md:px-20 py-20 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img alt="Luxury interior" class="w-full h-full object-cover" loading="lazy" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=3840&q=90&auto=format"/>
+      <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl bg-surface/90 backdrop-blur-xl p-12 md:p-20 md:-ml-12 border-l-4 border-secondary reveal-up">
+      <h6 class="font-label text-secondary uppercase tracking-[0.3em] text-xs mb-6 font-bold">Our Philosophy</h6>
+      <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-primary leading-[1.1] mb-8">The Luxury of Space and Silence.</h1>
+      <p class="text-lg font-light leading-relaxed text-on-surface-variant mb-10">
+        At The Atelier, we believe home is more than a residence — it is a curated reflection of the soul. We design for the quiet moments, the slow mornings, and the intentional gathering of objects that speak of craftsmanship and time.
+      </p>
+      <div class="flex items-center group cursor-pointer">
+        <span class="editorial-line group-hover:w-16 transition-all duration-500"></span>
+        <span class="font-headline text-secondary text-lg italic tracking-wide">Read our manifesto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet the Designers -->
+  <section class="py-32 px-8 md:px-20 bg-surface">
+    <div class="max-w-screen-2xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-baseline mb-20 gap-8">
+        <div class="max-w-xl">
+          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary mb-6 reveal-up">Meet the Designers</h2>
+          <p class="font-body text-on-surface-variant font-light reveal-up delay-1">Collaborating with global artisans who bridge the gap between traditional technique and contemporary form.</p>
+        </div>
+        <div class="hidden md:block h-[1px] bg-outline-variant flex-grow mx-12 opacity-30"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div class="md:col-span-7 group reveal-left">
+          <div class="relative overflow-hidden mb-6 aspect-[4/3]">
+            <img alt="Elena Moretti" class="w-full h-full object-cover object-[center_20%] grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1920&q=90&auto=format"/>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-headline text-2xl text-primary font-bold">Elena Moretti</h3>
+              <p class="text-secondary font-label text-sm tracking-widest uppercase mb-4">Milan &bull; Ceramic Arts</p>
+              <p class="font-body text-on-surface-variant font-light max-w-md leading-relaxed">Specializing in organic textures, Elena's work captures the tactile essence of the Italian coastline.</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-3xl hover:text-secondary transition-colors cursor-pointer">arrow_outward</span>
+          </div>
+        </div>
+        <div class="md:col-span-5 md:mt-24 group reveal-right">
+          <div class="relative overflow-hidden mb-6 aspect-[4/5]">
+            <img alt="Julian Vane" class="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=90&auto=format"/>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-headline text-2xl text-primary font-bold">Julian Vane</h3>
+              <p class="text-secondary font-label text-sm tracking-widest uppercase mb-4">Copenhagen &bull; Master Joinery</p>
+              <p class="font-body text-on-surface-variant font-light leading-relaxed">Julian's approach to wood celebrates the natural character, using hand-rubbed finishes that highlight every grain.</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-3xl hover:text-secondary transition-colors cursor-pointer">arrow_outward</span>
+          </div>
+        </div>
+        <div class="md:col-span-5 group reveal-left delay-1">
+          <div class="relative overflow-hidden mb-6 aspect-[4/5]">
+            <img alt="Sarah Chen" class="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700" loading="lazy" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1920&q=90&auto=format"/>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-headline text-2xl text-primary font-bold">Sarah Chen</h3>
+              <p class="text-secondary font-label text-sm tracking-widest uppercase mb-4">Tokyo &bull; Textile Innovation</p>
+              <p class="font-body text-on-surface-variant font-light leading-relaxed">Bridging ancestral weaving techniques with modern performance fibers to create textiles that feel alive.</p>
+            </div>
+            <span class="material-symbols-outlined text-primary text-3xl hover:text-secondary transition-colors cursor-pointer">arrow_outward</span>
+          </div>
+        </div>
+        <div class="md:col-span-7 bg-tertiary p-12 md:p-20 flex flex-col justify-center text-on-tertiary reveal-right delay-1">
+          <span class="material-symbols-outlined text-secondary text-5xl mb-8">format_quote</span>
+          <h4 class="font-headline text-3xl md:text-4xl italic leading-tight mb-8">
+            "True luxury is not defined by excess, but by the emotional resonance of the objects we surround ourselves with."
+          </h4>
+          <p class="font-label text-secondary uppercase tracking-widest text-sm">&mdash; Marcus Thorne, Founder</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainable Craftsmanship -->
+  <section class="py-32 bg-surface-container-low overflow-hidden">
+    <div class="max-w-screen-2xl mx-auto px-8 md:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div class="order-2 lg:order-1 relative reveal-left">
+          <div class="absolute -top-10 -left-10 w-40 h-40 border border-secondary/20"></div>
+          <img alt="Sustainable craft" class="w-full h-auto aspect-[4/5] object-cover relative z-10" loading="lazy" src="https://images.unsplash.com/photo-1616627547584-bf28cee262db?w=1920&q=90&auto=format"/>
+          <div class="absolute -bottom-8 -right-8 bg-primary text-on-primary p-8 hidden md:block z-20">
+            <p class="font-headline text-xl italic mb-2">Since 2012</p>
+            <p class="text-xs uppercase tracking-widest opacity-70">Ethically Sourced Materials</p>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2 reveal-right">
+          <h6 class="font-label text-secondary uppercase tracking-[0.3em] text-xs mb-6 font-bold">Our Commitment</h6>
+          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary mb-8 leading-tight">Sustainable Craftsmanship & Timeless Quality</h2>
+          <div class="space-y-12">
+            <div class="flex gap-6">
+              <span class="material-symbols-outlined text-secondary text-3xl">eco</span>
+              <div>
+                <h5 class="font-headline text-xl text-primary font-bold mb-2">Conscious Materiality</h5>
+                <p class="font-body text-on-surface-variant font-light leading-relaxed">We source FSC-certified timber and 100% organic linens, ensuring every thread has a traceable, ethical origin.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <span class="material-symbols-outlined text-secondary text-3xl">precision_manufacturing</span>
+              <div>
+                <h5 class="font-headline text-xl text-primary font-bold mb-2">Ancestral Techniques</h5>
+                <p class="font-body text-on-surface-variant font-light leading-relaxed">Our furniture is constructed using traditional joinery methods, allowing pieces to breathe and last generations.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <span class="material-symbols-outlined text-secondary text-3xl">all_inclusive</span>
+              <div>
+                <h5 class="font-headline text-xl text-primary font-bold mb-2">The Longevity Loop</h5>
+                <p class="font-body text-on-surface-variant font-light leading-relaxed">We design for permanence, creating aesthetic silhouettes that transcend trends and combat disposable interiors.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="py-20 bg-surface overflow-hidden">
+    <div class="flex overflow-x-auto pb-10 space-x-4 px-4 hide-scrollbar">
+      <img alt="Mood" class="h-[400px] w-auto flex-shrink-0 rounded hover:scale-[1.02] transition-transform duration-500" loading="lazy" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1920&q=90&auto=format"/>
+      <img alt="Mood" class="h-[400px] w-auto flex-shrink-0 mt-20 rounded hover:scale-[1.02] transition-transform duration-500" loading="lazy" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=90&auto=format"/>
+      <img alt="Mood" class="h-[400px] w-auto flex-shrink-0 rounded hover:scale-[1.02] transition-transform duration-500" loading="lazy" src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=1920&q=90&auto=format"/>
+      <img alt="Mood" class="h-[400px] w-auto flex-shrink-0 mt-20 rounded hover:scale-[1.02] transition-transform duration-500" loading="lazy" src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1920&q=90&auto=format"/>
+    </div>
+  </section>
+
+</div>
+
+<!-- ====================== CHECKOUT PAGE ====================== -->
+<div id="page-checkout" class="page">
+  <div class="pt-32 pb-24 px-8 max-w-screen-xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-headline text-primary font-bold mb-12 reveal-up">Checkout</h1>
+    <div class="grid md:grid-cols-3 gap-16">
+      <div class="md:col-span-2 space-y-10">
+        <div class="space-y-6">
+          <h3 class="font-headline text-xl text-primary">Shipping Information</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">First Name</label>
+              <input type="text" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">Last Name</label>
+              <input type="text" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">Email</label>
+            <input type="email" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">Address</label>
+            <input type="text" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">City</label>
+              <input type="text" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">State</label>
+              <input type="text" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">Zip</label>
+              <input type="text" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-6 pt-6">
+          <h3 class="font-headline text-xl text-primary">Payment</h3>
+          <p class="text-on-surface-variant text-sm">This is a demo. No real payment processing.</p>
+          <div>
+            <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">Card Number</label>
+            <input type="text" placeholder="**** **** **** ****" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">Expiry</label>
+              <input type="text" placeholder="MM/YY" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-2 block">CVV</label>
+              <input type="text" placeholder="***" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"/>
+            </div>
+          </div>
+        </div>
+        <button id="place-order-btn" class="w-full bg-primary text-on-primary py-4 uppercase tracking-widest text-xs font-semibold hover:bg-primary-container transition-all mt-8">
+          Place Order (Demo)
+        </button>
+      </div>
+      <div class="bg-surface-container-low p-8 h-fit sticky top-28">
+        <h3 class="font-headline text-xl text-primary mb-6">Order Summary</h3>
+        <div id="checkout-items" class="space-y-4 mb-6"></div>
+        <div class="border-t border-outline-variant/20 pt-4 space-y-2">
+          <div class="flex justify-between text-sm"><span class="text-on-surface-variant">Subtotal</span><span id="checkout-subtotal">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-on-surface-variant">Shipping</span><span>Free</span></div>
+          <div class="flex justify-between font-headline text-lg text-primary mt-4 pt-4 border-t border-outline-variant/20"><span>Total</span><span id="checkout-total">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== CONTACT PAGE ====================== -->
+<div id="page-contact" class="page">
+
+  <!-- Hero Strip -->
+  <section class="relative h-[50vh] min-h-[400px] flex items-end px-8 md:px-24 pb-16 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img alt="Atelier showroom" class="w-full h-full object-cover" loading="lazy" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=3840&q=90&auto=format"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/30 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl text-white">
+      <span class="text-secondary-container font-label tracking-[0.3em] uppercase text-xs mb-4 block reveal-up">Get in Touch</span>
+      <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] reveal-up delay-1">Let's Create Something Beautiful.</h1>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="py-24 px-8 md:px-24 bg-surface">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
+
+      <!-- Left: Info Cards -->
+      <div class="lg:col-span-5 space-y-16">
+
+        <div class="reveal-up">
+          <p class="text-on-surface-variant text-lg font-light leading-relaxed mb-12">
+            Whether you're envisioning a single statement piece or a complete interior transformation, our studio team is here to guide your journey.
+          </p>
+        </div>
+
+        <!-- Visit Card -->
+        <div class="group reveal-up delay-1">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 bg-surface-container-low flex items-center justify-center rounded-full group-hover:bg-primary-fixed transition-colors duration-500 flex-shrink-0">
+              <span class="material-symbols-outlined text-primary text-xl">location_on</span>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg text-primary mb-2">Visit Our Showroom</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">42 Walnut Street, Studio 3<br/>Brooklyn, NY 11201</p>
+              <p class="text-secondary text-xs uppercase tracking-widest mt-3">Mon — Sat, 10am — 6pm</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Card -->
+        <div class="group reveal-up delay-2">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 bg-surface-container-low flex items-center justify-center rounded-full group-hover:bg-primary-fixed transition-colors duration-500 flex-shrink-0">
+              <span class="material-symbols-outlined text-primary text-xl">mail</span>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg text-primary mb-2">Email Us</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">General: hello@theatelier.com</p>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Press: press@theatelier.com</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Card -->
+        <div class="group reveal-up delay-3">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 bg-surface-container-low flex items-center justify-center rounded-full group-hover:bg-primary-fixed transition-colors duration-500 flex-shrink-0">
+              <span class="material-symbols-outlined text-primary text-xl">call</span>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg text-primary mb-2">Call Us</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">+1 (212) 555-0147</p>
+              <p class="text-secondary text-xs uppercase tracking-widest mt-3">Design consultations by appointment</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social -->
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="lg:col-span-7">
+        <div class="bg-surface-container-low p-8 md:p-14 rounded-lg reveal-right">
+          <h2 class="font-headline text-3xl text-primary mb-3">Send Us a Message</h2>
+          <p class="text-on-surface-variant text-sm mb-10">We typically respond within one business day.</p>
+
+          <form id="contact-form" class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-3 block font-label">First Name *</label>
+                <input type="text" required class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors font-body" placeholder="Your first name"/>
+              </div>
+              <div>
+                <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-3 block font-label">Last Name *</label>
+                <input type="text" required class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors font-body" placeholder="Your last name"/>
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-3 block font-label">Email *</label>
+              <input type="email" required class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors font-body" placeholder="your@email.com"/>
+            </div>
+
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-3 block font-label">Subject</label>
+              <select class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors font-body text-on-surface-variant appearance-none cursor-pointer">
+                <option value="">Select a topic</option>
+                <option value="general">General Inquiry</option>
+                <option value="order">Order Support</option>
+                <option value="consultation">Design Consultation</option>
+                <option value="trade">Trade & Wholesale</option>
+                <option value="press">Press & Media</option>
+                <option value="careers">Careers</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-xs uppercase tracking-widest text-on-surface-variant mb-3 block font-label">Message *</label>
+              <textarea required rows="5" class="w-full bg-transparent border-b border-outline-variant/40 py-3 text-sm focus:outline-none focus:border-secondary transition-colors font-body resize-none" placeholder="Tell us about your project or question..."></textarea>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4">
+              <button type="submit" class="bg-primary text-on-primary px-12 py-4 uppercase tracking-widest text-xs font-semibold hover:bg-primary-container transition-all duration-300 active:scale-95">
+                Send Message
+              </button>
+              <span class="text-on-surface-variant text-xs">* Required fields</span>
+            </div>
+          </form>
+
+          <!-- Success State -->
+          <div id="contact-success" class="hidden text-center py-16">
+            <div class="w-16 h-16 bg-primary-fixed flex items-center justify-center mx-auto mb-6 rounded-full">
+              <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            </div>
+            <h3 class="font-headline text-2xl text-primary mb-3">Message Sent</h3>
+            <p class="text-on-surface-variant text-sm max-w-sm mx-auto">Thank you for reaching out. Our team will be in touch within one business day.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Map / Showroom Image Strip -->
+  <section class="relative h-[400px] overflow-hidden">
+    <img alt="Brooklyn showroom exterior" class="w-full h-full object-cover" loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=3840&q=90&auto=format"/>
+    <div class="absolute inset-0 bg-primary/10"></div>
+    <div class="absolute bottom-8 left-8 md:left-24 bg-surface/90 backdrop-blur-xl p-6 md:p-8 max-w-sm">
+      <h3 class="font-headline text-lg text-primary mb-1">Brooklyn Showroom</h3>
+      <p class="text-on-surface-variant text-sm">Open for private viewings and design consultations. <span class="text-secondary cursor-pointer hover:underline">Book an appointment</span></p>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="bg-surface-container-low">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 md:px-12 py-20 w-full max-w-screen-2xl mx-auto">
+    <div>
+      <span class="text-xl font-serif text-primary mb-4 block font-headline italic">The Atelier</span>
+      <p class="text-on-surface-variant text-sm leading-relaxed">Curating timeless atmospheres through sustainable luxury and artisanal heritage.</p>
+    </div>
+    <div>
+      <h4 class="font-headline text-lg text-primary mb-6">Collections</h4>
+      <ul class="space-y-4">
+        <li><a class="text-on-surface-variant hover:text-secondary transition-all text-sm cursor-pointer" data-page="collections">The Lounge Series</a></li>
+        <li><a class="text-on-surface-variant hover:text-secondary transition-all text-sm cursor-pointer" data-page="collections">Bedroom Sanctuary</a></li>
+        <li><a class="text-on-surface-variant hover:text-secondary transition-all text-sm cursor-pointer" data-page="collections">New Arrivals</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline text-lg text-primary mb-6">Company</h4>
+      <ul class="space-y-4">
+        <li><a class="text-on-surface-variant hover:text-secondary transition-all text-sm cursor-pointer" data-page="about">Our Designers</a></li>
+        <li><a class="text-on-surface-variant hover:text-secondary transition-all text-sm cursor-pointer" data-page="about">Ethical Sourcing</a></li>
+        <li><a class="text-on-surface-variant hover:text-secondary transition-all text-sm" href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline text-lg text-primary mb-6">Subscribe</h4>
+      <p class="text-on-surface-variant text-sm mb-6">Join our journal for exclusive design previews.</p>
+      <div class="flex border-b border-outline-variant/30 pb-2">
+        <input class="bg-transparent border-none outline-none text-xs w-full focus:ring-0 placeholder:text-on-surface-variant/50 font-label" placeholder="YOUR EMAIL" type="email"/>
+        <button class="text-primary font-bold text-xs tracking-widest uppercase hover:text-secondary transition-colors">Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="px-8 md:px-12 py-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4 max-w-screen-2xl mx-auto">
+    <span class="text-xs text-on-surface-variant/60 tracking-widest uppercase">&copy; 2024 The Digital Atelier. All rights reserved.</span>
+    <div class="flex gap-8">
+      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+        <span class="material-symbols-outlined text-base">photo_camera</span>
+        <span class="text-xs uppercase tracking-[0.2em]">Instagram</span>
+      </a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+        <span class="material-symbols-outlined text-base">push_pin</span>
+        <span class="text-xs uppercase tracking-[0.2em]">Pinterest</span>
+      </a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+        <span class="material-symbols-outlined text-base">mail</span>
+        <span class="text-xs uppercase tracking-[0.2em]">Email</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Order Success Toast -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-8 py-4 rounded-lg shadow-2xl z-[60] translate-y-20 opacity-0 transition-all duration-500 pointer-events-none">
+  <span id="toast-msg">Item added to bag</span>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
